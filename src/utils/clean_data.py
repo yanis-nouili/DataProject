@@ -3,10 +3,10 @@ from pathlib import Path
 
 def clean_data():
     """
-    Nettoie le fichier CSV brut et le sauvegarde dans data/cleaned/
+    Nettoie le fichier CSV brut et le sauvegarde dans data/processed/
     """
     raw_path = Path("data/raw/etat-du-trafic.csv")
-    cleaned_path = Path("data/cleaned/etat-du-trafic-clean.csv")
+    cleaned_path = Path("data/processed/etat-du-trafic-clean.csv")
     cleaned_path.parent.mkdir(parents=True, exist_ok=True)
 
     df = pd.read_csv(raw_path, sep=";")
