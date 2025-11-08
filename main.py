@@ -51,6 +51,11 @@ df = pd.read_csv(clean_path, sep=";")
 # Nettoyages complémentaires
 df["datetime"] = pd.to_datetime(df["datetime"], format="ISO8601", errors="coerce")
 
+# Heure de la journée (0–23) pour filtrer
+df["hour"] = df["datetime"].dt.hour
+hour_min, hour_max = int(df["hour"].min()), int(df["hour"].max())
+
+
 
 # "Geo Point" => lat, lon (forme "lat, lon")
 df[["lat", "lon"]] = df["Geo Point"].str.split(",", n=1, expand=True)
@@ -79,15 +84,30 @@ app.layout = html.Div(
             ],
             style={"marginBottom": "12px"},
         ),
-        dcc.Slider(     #seuil minimal de vitesse
-            id="vmin",
-            min=int(df["averageVehicleSpeed"].min()),
-            max=int(df["averageVehicleSpeed"].max()),
-            value=int(df["averageVehicleSpeed"].min()),
-            step=1,
-            marks=None,
-            tooltip={"placement": "bottom", "always_visible": True},
-        ),
+        html.Div([ #Limite légale de vitesse
+            html.Label("Filtrer par vitesse maximale autorisée"),
+            dcc.Dropdown(
+                id="vmax",
+                options=[{"label": f"{int(v)} km/h", "value": v} for v in sorted(df["vitesse_maxi"].dropna().unique())],
+                value=sorted(df["vitesse_maxi"].dropna().unique()),  # sélectionne tout par défaut
+                multi=True,
+            ),
+        ], style={"marginBottom": "12px"}),
+
+
+        html.Div([
+            html.Label("Vitesse minimale (km/h)"),
+            dcc.Slider(     #seuil minimal de vitesse
+                id="vmin",
+                min=int(df["averageVehicleSpeed"].min()),
+                max=int(df["averageVehicleSpeed"].max()),
+                value=int(df["averageVehicleSpeed"].min()),
+                step=1,
+                marks=None,
+                tooltip={"placement": "bottom", "always_visible": True},
+            ),
+        ], style={"marginBottom": "12px"}),
+
         dcc.Graph(id="hist"),
         dcc.Graph(id="map"),  #emplacement vide au depart; sera rempli par le callback 
     ],
@@ -99,11 +119,14 @@ app.layout = html.Div(
     Output("map", "figure"),
     Input("status", "value"),
     Input("vmin", "value"),
+    Input("vmax", "value"),
 )
-def update(selected_status, vmin): #crée un dataframe filtré; par les statuts selectionnés et la vitesse minimale
+def update(selected_status, vmin, vmax): #crée un dataframe filtré; par les statuts selectionnés et la vitesse minimale
     dff = df.copy()
     if selected_status:
         dff = dff[dff["trafficStatus"].isin(selected_status)]
+    if vmax:
+        dff = dff[dff["vitesse_maxi"].isin(vmax)]
     dff = dff[dff["averageVehicleSpeed"] >= vmin]
 
     # Histogramme
