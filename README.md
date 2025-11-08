@@ -18,10 +18,10 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
    git clone https://github.com/yanis-nouili/DataProject.git
    cd DataProject
 
-2. **Installer les dépendances**
+2. **Installer les dépendances :**
    pip install -r requirements.txt
 
-3. **Lancer l’application Dash**
+3. **Lancer l’application Dash :**
    python main.py
 
 Puis ouvrir le dash à l’adresse : http://127.0.0.1:8050/
@@ -78,8 +78,6 @@ Chaque filtre met automatiquement à jour :
 - la **carte interactive** représentant le trafic sur Rennes.
 ![Filtres du dashboard](images/filtres.png)
 
-
-## Visualisations principales
 
 ### Histogramme des vitesses moyennes
 Cet histogramme montre la distribution des vitesses moyennes observées sur l’ensemble du réseau routier de Rennes.
