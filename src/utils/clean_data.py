@@ -1,22 +1,32 @@
 import pandas as pd
-import os
+from pathlib import Path
 
-RAW_FILE = "data/raw/etat-du-trafic-en-temps-reel.csv"
-CLEAN_FILE = "data/cleaned/etat_du_trafic_clean.csv"
+def clean_data():
+    """
+    Nettoie le fichier CSV brut et le sauvegarde dans data/cleaned/
+    """
+    raw_path = Path("data/raw/etat-du-trafic.csv")
+    cleaned_path = Path("data/cleaned/etat-du-trafic-clean.csv")
+    cleaned_path.parent.mkdir(parents=True, exist_ok=True)
 
-def clean():
-    df = pd.read_csv(RAW_FILE, sep=';')
+    df = pd.read_csv(raw_path, sep=";")
 
-    df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
+    # Conversion datetime
+    df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce")
 
-    colonnes_utiles = [
-        'datetime', 'averageVehicleSpeed', 'travelTime', 'trafficStatus',
-        'Geo Point', 'vitesse_maxi', 'denomination', 'hierarchie_dv'
-    ]
-    df = df[colonnes_utiles]
+    # Colonnes utiles
+    cols = ['datetime', 'averageVehicleSpeed', 'travelTime', 'trafficStatus',
+            'Geo Point', 'vitesse_maxi', 'denomination', 'hierarchie_dv']
+    df_clean = df[cols]
 
-    df.to_csv(CLEAN_FILE, sep=';', index=False)
-    print("✅ Données nettoyées enregistrées dans", CLEAN_FILE)
+    # Géolocalisation : lat / lon
+    df_clean[["lat", "lon"]] = df_clean["Geo Point"].str.split(",", n=1, expand=True)
+    df_clean["lat"] = pd.to_numeric(df_clean["lat"], errors="coerce")
+    df_clean["lon"] = pd.to_numeric(df_clean["lon"], errors="coerce")
+
+    # Sauvegarde
+    df_clean.to_csv(cleaned_path, index=False, sep=";")
+    print(f"Fichier nettoyé sauvegardé : {cleaned_path}")
 
 if __name__ == "__main__":
-    clean()
+    clean_data()
