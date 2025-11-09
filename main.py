@@ -5,7 +5,7 @@ from dash import Dash, dcc, html, Input, Output
 from pathlib import Path
 
 
-"""# Charger le fichier CSV
+# Charger le fichier CSV
 df = pd.read_csv("data/raw/etat-du-trafic-en-temps-reel.csv", sep=';')
 
 # --- Exploration des données ---
@@ -41,7 +41,7 @@ print(df_clean.head())
 
 # Sauvegarder la version nettoyée
 df_clean.to_csv("data/processed/etat_du_trafic_clean.csv", index=False, sep=';')
-print("\n Fichier nettoyé sauvegardé dans data/processed/")"""
+print("\n Fichier nettoyé sauvegardé dans data/processed/")
 
 
 # --- Chargement ---
