@@ -3,19 +3,19 @@ import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
 from pathlib import Path
 
-# ✅ On importe les fonctions dans utils
+# On importe les fonctions get_data et clean_data dans depuis dataproject/src/utils
 from utils.get_data import get_data
 from utils.clean_data import clean_data
 
 
-# --- Exécution des étapes de pipeline ---
+# On execute les deux fonctions pour recuperer et nettoyer les données
 print("📥 Téléchargement des données...")
 get_data()
 
 print("🧹 Nettoyage des données...")
 clean_data()
 
-# --- Chargement du fichier nettoyé ---
+# Une fois le fichier nettoyé, on le récupére depuis data/processed 
 clean_path = Path("data/processed/etats_du_trafic_clean.csv")
 df = pd.read_csv(clean_path, sep=";")
 
@@ -23,16 +23,16 @@ df = pd.read_csv(clean_path, sep=";")
 df["datetime"] = pd.to_datetime(df["datetime"], errors="coerce")
 df["hour"] = df["datetime"].dt.hour
 
-# Séparer lat/lon
+# On sépare "Geo Point" pour récupérer séparemment la latidue et la longitude (forme "lat, lon")
 df[["lat", "lon"]] = df["Geo Point"].str.split(",", n=1, expand=True)
 df["lat"] = df["lat"].astype(float)
 df["lon"] = df["lon"].astype(float)
 
-# Valeurs pour filtres
+# Valeurs possibles de statut
 statuses = sorted(df["trafficStatus"].dropna().unique())
 hour_min, hour_max = int(df["hour"].min()), int(df["hour"].max())
 
-# --- APP DASH ---
+# On Instancie maintenant  l'application Dash
 app = Dash(__name__)
 app.title = "Trafic Rennes — Dashboard"
 
@@ -80,14 +80,14 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
+@app.callback( #met à jour les graphiques en fonction des filtres
     Output("hist", "figure"),
     Output("map", "figure"),
     Input("status", "value"),
     Input("vmin", "value"),
     Input("vmax", "value"),
 )
-def update(selected_status, vmin, vmax):
+def update(selected_status, vmin, vmax): #crée un dataframe filtré; par les statuts selectionnés et la vitesse minimale
     dff = df.copy()
 
     if selected_status:
@@ -96,8 +96,12 @@ def update(selected_status, vmin, vmax):
         dff = dff[dff["vitesse_maxi"].isin(vmax)]
     dff = dff[dff["averageVehicleSpeed"] >= vmin]
 
-    fig_hist = px.histogram(
-        dff, x="averageVehicleSpeed", nbins=20,
+    # Histogramme
+    
+    fig_hist = px.histogram( #compte le nombre d'occurrences pour chaque intervalle de vitesse
+        dff, 
+        x="averageVehicleSpeed", 
+        nbins=20,
         title="Distribution des vitesses moyennes (km/h)"
     )
 
@@ -106,13 +110,19 @@ def update(selected_status, vmin, vmax):
         lat="lat", lon="lon",
         color="trafficStatus",
         hover_name="denomination",
-        hover_data={"averageVehicleSpeed": True, "vitesse_maxi": True, "lat": False, "lon": False},
-        size="averageVehicleSpeed", size_max=15, zoom=10,
+        hover_data={ #affiche les infos au survol; masque lat et lon
+            "averageVehicleSpeed": True, 
+            "vitesse_maxi": True, 
+            "lat": False, 
+            "lon": False},
+        size="averageVehicleSpeed", 
+        size_max=15, 
+        zoom=10,
         title="Carte du trafic",
     )
-    fig_map.update_layout(mapbox_style="open-street-map", margin=dict(l=0, r=0, t=40, b=0))
-    return fig_hist, fig_map
+    fig_map.update_layout(mapbox_style="open-street-map", margin=dict(l=0, r=0, t=40, b=0)) #évite d'avoir besoin d'une clé Mapbox
+    return fig_hist, fig_map #renvoie les deux figures 
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) #lance l'app en local
