@@ -1,21 +1,24 @@
-import requests
 from pathlib import Path
+import shutil
 
 def get_data():
     """
-    Télécharge le fichier CSV du trafic routier Rennes et le stocke dans data/raw/
+    Vérifie que le fichier CSV brut existe dans data/raw/.
+    Si non, copie depuis un emplacement local.
     """
-    url = "https://data.exemple.fr/etat-du-trafic-en-temps-reel.csv"  # Remplacer par l'URL réelle
-
     raw_path = Path("data/raw/etat-du-trafic-en-temps-reel.csv")
     raw_path.parent.mkdir(parents=True, exist_ok=True)
 
-    r = requests.get(url)
-    if r.status_code == 200:
-        raw_path.write_bytes(r.content)
-        print(f"✅ Fichier téléchargé : {raw_path}")
+    if raw_path.exists():
+        print(f"✅ Fichier déjà présent : {raw_path}")
     else:
-        raise Exception(f"❌ Erreur téléchargement : {r.status_code}")
+        # Exemple : copie depuis un dossier local 'source_data'
+        source = Path("source_data/etat-du-trafic-en-temps-reel.csv")
+        if source.exists():
+            shutil.copy(source, raw_path)
+            print(f"✅ Fichier copié depuis {source}")
+        else:
+            raise FileNotFoundError(f"❌ Aucun fichier trouvé à {raw_path} ni {source}")
 
 if __name__ == "__main__":
     get_data()
