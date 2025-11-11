@@ -32,7 +32,7 @@ def clean_data():
     # la façon dont le CSV est rempli
     df = pd.read_csv(raw_path, sep=";")
 
-
+    """
     ## 2/ Observation initiale des données
 
     # Nous observons mainteant le jeu de données pour pouvoir appréhender
@@ -56,7 +56,7 @@ def clean_data():
     # Vérifie la présence de valeurs manquantes
     print("Valeurs manquantes :")
     print(df.isna().sum(), "\n")
-
+    """
 
     ## 3/ Sélection des colonnes pertinentes
 
