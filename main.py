@@ -2,12 +2,20 @@ import pandas as pd
 import plotly.express as px 
 from dash import Dash, dcc, html, Input, Output 
 from pathlib import Path 
+
+# On importe les fonctions utilitaires
 from utils.clean_data import clean_data
+from utils.get_data import get_data
 
 
-# 1) On Exécute la fonction définie dans "utils/clean_data.py" pour 
+# 1) On recupere le fichier CSV depuis le site grace à la
+# fonction définie dans "utils/get_data.py"
+print("Import du fichier CSV brut depuis le site en ligne")
+get_data()
+
+# Puis on exécute la fonction définie dans "utils/clean_data.py" pour 
 # génèrer le chemin data/processed/etats_du_trafic_clean.csv
-print("Nettoyage du fichier CSV brut...")
+print("Nettoyage du fichier CSV brut")
 clean_data()
 
 
