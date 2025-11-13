@@ -1,4 +1,4 @@
-"# DataProject" 
+# DataProject
 # Projet Data — Analyse du trafic routier à Rennes
 
 ## Objectif du projet
@@ -8,6 +8,33 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
 - d’explorer les vitesses moyennes des véhicules,  
 - de filtrer par statut du trafic ou par vitesse,  
 - et de visualiser la situation du trafic sur une carte.
+
+## Structure du projet  <!-- Ajout : description de l'organisation des fichiers -->
+Le projet est organisé de la manière suivante :
+
+DataProject/
+
+│-- main.py # Point d'entrée pour lancer le dashboard
+
+│-- requirements.txt # Liste des packages nécessaires
+
+│-- README.md # Ce fichier
+
+│-- data/ # Contient les données
+
+│ ├─ raw/ # Données brutes téléchargées via get_data.py
+
+│ └─ processed/ # Données nettoyées via clean_data.py
+
+│-- images/ # Images utilisées dans le README
+
+│-- utils/ # Fonctions utilitaires
+
+│ ├─ get_data.py # Téléchargement des données Open Data
+
+│ └─ clean_data.py # Nettoyage et préparation des données
+
+
 
 ## User Guide
 
@@ -21,7 +48,10 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
 2. **Installer les dépendances :**
    pip install -r requirements.txt
 
-3. **Lancer l’application Dash :**
+3. **Télécharger les données brutes :**  <!-- Ajout : expliquer l'étape get_data -->
+   python -c "from utils.get_data import get_data; get_data()"
+
+4. **Lancer l’application Dash :**
    python main.py
 
 Puis ouvrir le dash à l’adresse : http://127.0.0.1:8050/
@@ -30,7 +60,6 @@ Vous verrez une interface interactive avec :
 - un histogramme des vitesses moyennes,
 - une carte dynamique représentant le statut du trafic sur Rennes,
 - plusieurs filtres : vitesse minimale, vitesse maximale, statut du trafic
-
 
 ## Data 
 Les données proviennent de la plateforme [Open Data Rennes Métropole](https://www.data.gouv.fr/datasets/etat-du-trafic-en-temps-reel/).  
@@ -41,7 +70,6 @@ Elles contiennent des informations sur :
 - les coordonnées géographiques (`Geo Point`),  
 - la vitesse maximale autorisée (`vitesse_maxi`),  
 - ainsi que des informations de hiérarchie et de dénomination des routes.
-
 
 ### Préparation et nettoyage des données
 Un premier travail de nettoyage a été effectué afin de rendre les données exploitables et de garder les plus nécessaires pour notre projet.
@@ -54,6 +82,11 @@ Un premier travail de nettoyage a été effectué afin de rendre les données ex
 
 Ce nettoyage a été réalisé dans le script main.py
 
+### Ajout : Scripts utilitaires  <!-- Ajout : documentation sur get_data et clean_data -->
+Le projet contient deux scripts utilitaires principaux :
+
+- `get_data.py` : récupère les données depuis Open Data Rennes et les sauvegarde dans `data/raw/`.
+- `clean_data.py` : nettoie les données téléchargées et les prépare pour le dashboard (création des colonnes `lat`, `lon`, conversion datetime, filtrage des colonnes).
 
 ## Rapport d’analyse
 
@@ -64,13 +97,12 @@ ce qui indique un trafic dense sur les axes urbains de Rennes.
 - Les statuts `freeFlow` se concentrent sur les zones périphériques.
 - La vitesse maximale autorisée la plus fréquente est de 50 km/h, correspondant aux zones urbaines principales.
 
-
 ### Filtres disponibles dans l’application
 
 L’application Dash permet d’explorer les données grâce à plusieurs filtres interactifs :
 
-**Statut du trafic** : Permet de sélectionner un ou plusieurs statuts parmi `freeFlow`, `heavy`, `congested`, `unknown`.
-**Vitesse minimale** : Filtre les tronçons dont la vitesse moyenne est **supérieure** à la valeur choisie. 
+**Statut du trafic** : Permet de sélectionner un ou plusieurs statuts parmi `freeFlow`, `heavy`, `congested`, `unknown`.  
+**Vitesse minimale** : Filtre les tronçons dont la vitesse moyenne est **supérieure** à la valeur choisie.  
 **Vitesse maximale autorisée** : Filtre les tronçons dont la vitesse limite est **inférieure** à la valeur choisie.
 
 Chaque filtre met automatiquement à jour :
@@ -78,12 +110,10 @@ Chaque filtre met automatiquement à jour :
 - la **carte interactive** représentant le trafic sur Rennes.
 ![Filtres du dashboard](images/filtres.png)
 
-
 ### Histogramme des vitesses moyennes
 Cet histogramme montre la distribution des vitesses moyennes observées sur l’ensemble du réseau routier de Rennes.
 
 ![Histogramme](images/histogramme.png)
-
 
 ### Carte du trafic à Rennes
 La carte interactive permet de visualiser le trafic en fonction de son **statut** (`freeFlow`, `heavy`, `congested`, `unknown`) et de la **vitesse moyenne des véhicules**.
@@ -94,11 +124,24 @@ Chaque point représente un tronçon routier :
 
 ![Carte du trafic](images/carte_rennes.png)
 
+## Vidéo de démonstration  <!-- Ajout : indiquer la vidéo -->
+Une courte vidéo présentant l’interface et les fonctionnalités du dashboard est fournie dans `video.mp4`.
 
 ## Copyripht
 
 je déclare sur l’honneur que le code fourni a été produit par moi/nous même, à l’exception des lignes ci dessous ;
 
+
+
+
+
 pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée ;
+
+
+
+
+
+
+
 
 toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
