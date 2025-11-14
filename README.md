@@ -13,26 +13,26 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
 Le projet est organisé de la manière suivante :
 
 DataProject/
+├── main.py # Application Dash principale (point d'entrée)
+├── requirements.txt # Liste des dépendances Python
+├── README.md # Documentation complète du projet
+├── video.mp4 # Démonstration du dashboard
 
-│-- main.py # Point d'entrée pour lancer le dashboard
+├── data/
+│ ├── raw/ # Données brutes (téléchargées depuis Open Data)
+│ │ └── etat-du-trafic-en-temps-reel.csv
+│ │
+│ └── processed/ # Données nettoyées prêtes à l’analyse
+│ └── etats_du_trafic_clean.csv
 
-│-- requirements.txt # Liste des packages nécessaires
+├── images/ # Illustrations utilisées dans le README
+│ ├── filtres.png
+│ ├── histogramme.png
+│ └── carte_rennes.png
 
-│-- README.md # Ce fichier
-
-│-- data/ # Contient les données
-
-│ ├─ raw/ # Données brutes téléchargées via get_data.py
-
-│ └─ processed/ # Données nettoyées via clean_data.py
-
-│-- images/ # Images utilisées dans le README
-
-│-- utils/ # Fonctions utilitaires
-
-│ ├─ get_data.py # Téléchargement des données Open Data
-
-│ └─ clean_data.py # Nettoyage et préparation des données
+└── src/utils/ # Scripts utilitaires
+├── get_data.py # Téléchargement du CSV brut depuis Open Data Rennes
+└── clean_data.py # Nettoyage du CSV + création lat/lon + filtrage colonnes
 
 
 
@@ -42,18 +42,32 @@ DataProject/
 
 1. **Cloner le dépôt GitHub :**
    
+   ```bash
    git clone https://github.com/yanis-nouili/DataProject.git
    cd DataProject
+   ```
 
 2. **Installer les dépendances :**
+   ```bash
    pip install -r requirements.txt
+   ```
 
 3. **Télécharger les données brutes :**  <!-- Ajout : expliquer l'étape get_data -->
+   ```bash
    python -c "from utils.get_data import get_data; get_data()"
+   ```
 
-4. **Lancer l’application Dash :**
+4. **Nettoyer les données :** 
+   ```bash
+   python -c "from utils.clean_data import clean_data; clean_data()"
+   ```
+   Cela génère le fichier propre :
+   `data/processed/etats_du_trafic_clean.csv`
+
+5. **Lancer l’application Dash :**
+```bash
    python main.py
-
+   ```
 Puis ouvrir le dash à l’adresse : http://127.0.0.1:8050/
 
 Vous verrez une interface interactive avec :
@@ -80,7 +94,7 @@ Un premier travail de nettoyage a été effectué afin de rendre les données ex
 4. **Suppression** des colonnes inutiles (informations administratives redondantes).
 5. **Sauvegarde** du fichier nettoyé dans `data/processed/etat_du_trafic_clean.csv`.
 
-Ce nettoyage a été réalisé dans le script main.py
+Ce nettoyage est automatisé dans le script `utils/clean_data.py`.
 
 ### Ajout : Scripts utilitaires  <!-- Ajout : documentation sur get_data et clean_data -->
 Le projet contient deux scripts utilitaires principaux :
@@ -127,7 +141,7 @@ Chaque point représente un tronçon routier :
 ## Vidéo de démonstration  <!-- Ajout : indiquer la vidéo -->
 Une courte vidéo présentant l’interface et les fonctionnalités du dashboard est fournie dans `video.mp4`.
 
-## Copyripht
+## Copyright
 
 je déclare sur l’honneur que le code fourni a été produit par moi/nous même, à l’exception des lignes ci dessous ;
 
