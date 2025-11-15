@@ -11,7 +11,7 @@ clean_path = Path("data/processed/etat_du_trafic_clean.csv")
 # Si le fichier nettoyé n'existe pas, On Exécute la fonction définie dans 
 # "utils/clean_data.py" pour génèrer le chemin data/processed/etats_du_trafic_clean.csv
 if not clean_path.exists():
-    print("Fichier nettoyé introuvable — génération en cours...")
+    print("Fichier nettoyé introuvable")
     clean_data()
 
 df = pd.read_csv(clean_path, sep=";")
