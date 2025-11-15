@@ -22,7 +22,6 @@ def get_data():
 
     # 3/ Sinon, on télécharge le fichier depuis le site "Open Data Rennes"
     url = "https://www.data.gouv.fr/datasets/etat-du-trafic-en-temps-reel/#/resources/02666160-4137-4c9a-a859-ed0a9e84679a"
-    print("Téléchargement du fichier depuis Open Data Rennes")
     
     response = requests.get(url)
     if response.status_code == 200:
