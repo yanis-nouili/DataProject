@@ -126,28 +126,18 @@ Le schéma ci-dessous illustre cette architecture.
 
 ### Diagramme d’architecture
 
-```mermaid
-flowchart TD
+---
+config:
+  flowchart:
+    htmlLabels: false
+---
+flowchart LR
+    markdown["`This **is** _Markdown_`"]
+    newLines["`Line1
+    Line 2
+    Line 3`"]
+    markdown --> newLines
 
-    A[main.py] -->|importe| B[clean_data.py]
-    A -->|importe éventuellement| C[get_data.py]
-    A --> D[Dash (App / Layout / Callbacks)]
-
-    B -->|lit & nettoie| E[data/raw/etat-du-trafic.csv]
-    B -->|génère| F[data/processed/etat_du_trafic_clean.csv]
-
-    D -->|utilise| F
-
-    subgraph utils/
-        B
-        C
-    end
-
-    subgraph data/
-        E
-        F
-    end
-```
 
 
 
