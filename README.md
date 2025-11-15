@@ -12,27 +12,28 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
 ## Structure du projet  <!-- Ajout : description de l'organisation des fichiers -->
 Le projet est organisé de la manière suivante :
 
+
 DataProject/
-├── main.py # Application Dash principale (point d'entrée)
-├── requirements.txt # Liste des dépendances Python
-├── README.md # Documentation complète du projet
-├── video.mp4 # Démonstration du dashboard
-
-├── data/
-│ ├── raw/ # Données brutes (téléchargées depuis Open Data)
-│ │ └── etat-du-trafic-en-temps-reel.csv
-│ │
-│ └── processed/ # Données nettoyées prêtes à l’analyse
-│ └── etats_du_trafic_clean.csv
-
-├── images/ # Illustrations utilisées dans le README
-│ ├── filtres.png
-│ ├── histogramme.png
-│ └── carte_rennes.png
-
-└── src/utils/ # Scripts utilitaires
-├── get_data.py # Téléchargement du CSV brut depuis Open Data Rennes
-└── clean_data.py # Nettoyage du CSV + création lat/lon + filtrage colonnes
+│
+├── main.py                      # Application Dash principale (point d'entrée)
+├── requirements.txt             # Liste des dépendances Python
+├── README.md                    # Documentation complète du projet
+├── video.mp4                    # Démonstration du dashboard
+│
+├── data/                        # Données du projet
+│   ├── raw/                     # Données brutes (téléchargées depuis Open Data)
+│   │   └── etat-du-trafic-en-temps-reel.csv
+│   └── processed/               # Données nettoyées prêtes à l’analyse
+│       └── etats_du_trafic_clean.csv
+│
+├── images/                      # Illustrations utilisées dans le README
+│   ├── filtre.png
+│   ├── histogramme.png
+│   └── carte_rennes.png
+│
+└── src/utils/                   # Scripts utilitaires
+    ├── get_data.py              # Téléchargement du CSV brut depuis Open Data Rennes
+    └── clean_data.py            # Nettoyage du CSV + création lat/lon + filtrage colonnes
 
 
 
