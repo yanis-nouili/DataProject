@@ -23,10 +23,14 @@ DataProject/
 
 │-- data/ # Contient les données 
 
-│ ├─ raw/ # Données brutes téléchargées via get_data.py 
+│ ├─  raw/
 
-│ └─ processed/ # Données nettoyées via clean_data.py 
+│   └─ etat-du-trafic-en-temps-reel.csv # Données brutes téléchargées via get_data.py
 
+│ ├─  processed/
+ 
+│ └─ etat_du_trafic_clean.csv # Données nettoyées via clean_data.py
+    
 │-- images/ # Images utilisées dans le README 
 
 │-- utils/ # Fonctions utilitaires 
