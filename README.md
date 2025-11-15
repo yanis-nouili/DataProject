@@ -183,19 +183,41 @@ Une courte vidéo présentant l’interface et les fonctionnalités du dashboard
 
 ## Copyright
 
-je déclare sur l’honneur que le code fourni a été produit par moi/nous même, à l’exception des lignes ci dessous ;
+### get_data.py
 
+raw_path.parent.mkdir(parents=True, exist_ok=True)  # création dossier si inexistant
 
+if raw_path.exists():
+   print(f"Fichier déjà présent : {raw_path}")
+   return  
 
+if response.status_code == 200:
+   raw_path.write_bytes(response.content)  # sauvegarde du fichier
+   print(f"Fichier téléchargé et sauvegardé : {raw_path}")
+else:
+   print(f"Erreur lors du téléchargement. Status code : {response.status_code}")
 
+### clean_data.py
+
+cleaned_path.parent.mkdir(parents=True, exist_ok=True)
+
+df_clean[["lat", "lon"]] = df_clean["Geo Point"].str.split(",", n=1, expand=True)
+
+### main.py
+
+if not clean_path.exists():
+   print("Fichier nettoyé introuvable")
+   clean_data()
+
+if "lat" not in df.columns or "lon" not in df.columns:
+   df[["lat", "lon"]] = df["Geo Point"].str.split(",", n=1, expand=True)
+   df["lat"] = df["lat"].astype(float)
+   df["lon"] = df["lon"].astype(float)
 
 pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée ;
 
+### ChatGPT
 
-
-
-
-
-
+toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
 
 toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
