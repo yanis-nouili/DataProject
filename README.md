@@ -216,7 +216,7 @@ if "lat" not in df.columns or "lon" not in df.columns:
 
 pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée ;
 
-### ChatGPT
+### Pour chacune des lignes de code ne nous appartenant pas, seul ChatGPT a été utilisé
 
 toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
 
