@@ -131,7 +131,7 @@ flowchart TD
 
     A[main.py] -->|importe| B[clean_data.py]
     A -->|importe éventuellement| C[get_data.py]
-    A --> D[Dash<br/>(App / Layout / Callbacks)]
+    A --> D[Dash (App / Layout / Callbacks)]
 
     B -->|lit & nettoie| E[data/raw/etat-du-trafic.csv]
     B -->|génère| F[data/processed/etat_du_trafic_clean.csv]
@@ -148,6 +148,7 @@ flowchart TD
         F
     end
 ```
+
 
 
 
