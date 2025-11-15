@@ -123,13 +123,16 @@ Les scripts du dossier utils/ fournissent des fonctionnalités séparées :
 
 Le schéma ci-dessous illustre cette architecture.
 
+
+```md
 ### Diagramme d’architecture
 
+```mermaid
 flowchart TD
 
     A[main.py] -->|importe| B[clean_data.py]
     A -->|importe éventuellement| C[get_data.py]
-    A --> D[Dash\n(App / Layout / Callbacks)]
+    A --> D[Dash<br/>(App / Layout / Callbacks)]
 
     B -->|lit & nettoie| E[data/raw/etat-du-trafic.csv]
     B -->|génère| F[data/processed/etat_du_trafic_clean.csv]
