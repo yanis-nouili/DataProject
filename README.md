@@ -103,6 +103,47 @@ Le projet contient deux scripts utilitaires principaux :
 - `get_data.py` : récupère les données depuis Open Data Rennes et les sauvegarde dans `data/raw/`.
 - `clean_data.py` : nettoie les données téléchargées et les prépare pour le dashboard (création des colonnes `lat`, `lon`, conversion datetime, filtrage des colonnes).
 
+
+## Developer Guide
+
+Cette section décrit l’architecture générale du projet ainsi que les relations entre les différents fichiers Python.
+Le code suit une approche impérative, avec un programme principal (`main.py`) qui :
+-charge les données nettoyées,
+- initialise l'application Dash,
+
+- construit l’interface utilisateur,
+- met à jour les graphiques via des callbacks.
+
+Les scripts du dossier utils/ fournissent des fonctionnalités séparées :
+- téléchargement des données (`get_data.py`),
+- nettoyage et préparation (`clean_data.py`).
+
+Le schéma ci-dessous illustre cette architecture.
+
+### Diagramme d’architecture
+
+flowchart TD
+
+    A[main.py] -->|importe| B[clean_data.py]
+    A -->|importe éventuellement| C[get_data.py]
+    A --> D[Dash\n(App / Layout / Callbacks)]
+
+    B -->|lit & nettoie| E[data/raw/etat-du-trafic.csv]
+    B -->|génère| F[data/processed/etat_du_trafic_clean.csv]
+
+    D -->|utilise| F
+
+    subgraph utils/
+        B
+        C
+    end
+
+    subgraph data/
+        E
+        F
+    end
+
+
 ## Rapport d’analyse
 
 ### Observations principales:
