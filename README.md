@@ -182,7 +182,7 @@ Chaque point représente un tronçon routier :
 ![Carte du trafic](images/carte_rennes.png)
 
 ## Vidéo de démonstration  <!-- Ajout : indiquer la vidéo -->
-Une courte vidéo présentant l’interface et les fonctionnalités du dashboard est fournie dans `video.mp4`.
+Une courte vidéo présentant l’interface et les fonctionnalités du dashboard est fournie dans `video.zip`.
 
 ## Copyright
 
