@@ -124,7 +124,6 @@ Les scripts du dossier utils/ fournissent des fonctionnalités séparées :
 Le schéma ci-dessous illustre cette architecture.
 
 
-```md
 ### Diagramme d’architecture
 
 ```mermaid
@@ -148,6 +147,8 @@ flowchart TD
         E
         F
     end
+```
+
 
 
 ## Rapport d’analyse
