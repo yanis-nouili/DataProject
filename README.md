@@ -12,30 +12,29 @@ L’application a été développée en **Python** avec le framework **Dash (Plo
 ## Structure du projet  <!-- Ajout : description de l'organisation des fichiers -->
 Le projet est organisé de la manière suivante :
 
-
 DataProject/
 
-│-- main.py # Point d'entrée pour lancer le dashboard 
+│-- main.py # Point d'entrée pour lancer le dashboard
 
-│-- requirements.txt # Liste des packages nécessaires 
+│-- requirements.txt # Liste des packages nécessaires
 
-│-- README.md # Ce fichier 
+│-- README.md # Ce fichier
 
-│-- data/ # Contient les données 
+│-- data/ # Contient les données
 
-│ ├─  raw/
+│ ├─ raw/
 
-│   └─ etat-du-trafic-en-temps-reel.csv # Données brutes téléchargées via get_data.py
+│ └─ etat-du-trafic-en-temps-reel.csv # Données brutes téléchargées via get_data.py
 
-│ ├─  processed/
- 
+│ ├─ processed/
+
 │ └─ etat_du_trafic_clean.csv # Données nettoyées via clean_data.py
-    
-│-- images/ # Images utilisées dans le README 
 
-│-- utils/ # Fonctions utilitaires 
+│-- images/ # Images utilisées dans le README
 
-│ ├─ get_data.py # Téléchargement des données Open Data 
+│-- utils/ # Fonctions utilitaires
+
+│ ├─ get_data.py # Téléchargement des données Open Data
 
 │ └─ clean_data.py # Nettoyage et préparation des données
 
