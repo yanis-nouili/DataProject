@@ -126,17 +126,17 @@ Le schéma ci-dessous illustre cette architecture.
 
 ### Diagramme d’architecture
 
----
-config:
-  flowchart:
-    htmlLabels: false
----
-flowchart LR
-    markdown["`This **is** _Markdown_`"]
-    newLines["`Line1
-    Line 2
-    Line 3`"]
-    markdown --> newLines
+```mermaid
+%%{init: { "fontFamily": "GitLab Sans" }}%%
+graph TD
+    accTitle: Basic Mermaid diagram example
+    accDescr: Simple flowchart showing nodes A, B, C, and D with connections between them.
+
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
 
 
 
