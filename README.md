@@ -14,26 +14,26 @@ Le projet est organisé de la manière suivante :
 
 
 DataProject/
-│
-├── main.py                      # Application Dash principale (point d'entrée)
-├── requirements.txt             # Liste des dépendances Python
-├── README.md                    # Documentation complète du projet
-├── video.mp4                    # Démonstration du dashboard
-│
-├── data/                        # Données du projet
-│   ├── raw/                     # Données brutes (téléchargées depuis Open Data)
-│   │   └── etat-du-trafic-en-temps-reel.csv
-│   └── processed/               # Données nettoyées prêtes à l’analyse
-│       └── etats_du_trafic_clean.csv
-│
-├── images/                      # Illustrations utilisées dans le README
-│   ├── filtre.png
-│   ├── histogramme.png
-│   └── carte_rennes.png
-│
-└── src/utils/                   # Scripts utilitaires
-    ├── get_data.py              # Téléchargement du CSV brut depuis Open Data Rennes
-    └── clean_data.py            # Nettoyage du CSV + création lat/lon + filtrage colonnes
+
+│-- main.py # Point d'entrée pour lancer le dashboard 
+
+│-- requirements.txt # Liste des packages nécessaires 
+
+│-- README.md # Ce fichier 
+
+│-- data/ # Contient les données 
+
+│ ├─ raw/ # Données brutes téléchargées via get_data.py 
+
+│ └─ processed/ # Données nettoyées via clean_data.py 
+
+│-- images/ # Images utilisées dans le README 
+
+│-- utils/ # Fonctions utilitaires 
+
+│ ├─ get_data.py # Téléchargement des données Open Data 
+
+│ └─ clean_data.py # Nettoyage et préparation des données
 
 
 
