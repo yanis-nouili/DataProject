@@ -228,27 +228,43 @@ else:
 
 **Filtre “Statut du trafic”**:
 
-html.Div(
-            [
-                html.Label("Filtrer par statut du trafic"), # Label affiché
-                dcc.Dropdown(
-                    id="status", # Identifiant du composant 
-                    options=[{"label": s, "value": s} for s in statuses], # Liste des choix
-                    value=statuses, # Valeurs sélectionnées par défaut
-                    multi=True, # Autorise plusieurs valeurs
-                ),
-            ],
-            style={"marginBottom": "12px"},
-        ),
+"html.Div(
+   [
+      html.Label("Filtrer par statut du trafic"), # Label affiché
+      dcc.Dropdown(
+         id="status", # Identifiant du composant 
+         options=[{"label": s, "value": s} for s in statuses], # Liste des choix
+         value=statuses, # Valeurs sélectionnées par défaut
+         multi=True, # Autorise plusieurs valeurs
+      ),
+   ],
+   style={"marginBottom": "12px"},
+),"
 
 Nous avons ensuite réutilisé cette structure comme base pour développer les autres filtres de l'application
 
 
+### README 
 
-pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée ;
+Nous nous sommes inspirés du site web donné dans le cours [GitLab Docs](https://docs.gitlab.com/user/markdown/#mermaid) pour le diagramme d'architecture :
+
+"%%{init: { "fontFamily": "GitLab Sans" } }%%
+graph TD
+
+    accTitle: Architecture du projet DataProject
+    accDescr: Diagramme montrant les relations entre main.py, clean_data.py, get_data.py et les fichiers CSV.
+
+    A[main.py] --> B[clean_data.py];
+    A --> C[get_data.py];
+
+    C --> R[data/raw/etat-du-trafic.csv];
+    B --> R;
+
+    B --> P[data/processed/etat_du_trafic_clean.csv];
+    A --> P; "
+
 
 ### Pour chacune des lignes de code ne nous appartenant pas, seul ChatGPT a été utilisé
 
-toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
+Toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
 
-toute ligne non déclarée ci dessus est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
