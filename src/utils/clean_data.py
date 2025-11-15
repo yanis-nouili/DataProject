@@ -13,10 +13,9 @@ def clean_data():
     4/ Extraction des coordonnées lat / lon depuis "Geo Point"
     5/ Export du CSV nettoyé dans data/processed/
     """
-
-
+    
     ## 1/ Chargement du CSV brut depuis "data/raw/ 
-   
+
     # On commence par définir les chemins des fichiers
  
     # raw_path est le chemin vers le CSV brut déjà téléchargé
@@ -89,7 +88,6 @@ def clean_data():
     # "Geo Point" est sous la forme "lat, lon". Nous allons le séparer en deux colonnes 
     # distinctes pour pouvoir récupérer la latitude et la longitude 
 
-
     # "str.split(",", n=1, expand=True)" sépare "Geo Point" en deux colonnes
     df_clean[["lat", "lon"]] = df_clean["Geo Point"].str.split(",", n=1, expand=True)
 
@@ -98,19 +96,14 @@ def clean_data():
     df_clean["lat"] = pd.to_numeric(df_clean["lat"], errors="coerce")
     df_clean["lon"] = pd.to_numeric(df_clean["lon"], errors="coerce")
 
-
     # 5/ Export du CSV nettoyé
 
     # Et pour nous exportons le fichier nettoyé vers le chemin défini au
     # préalable et enregistré dans la varibale cleaned_path
 
-
     # Le paramètre "index=False" permet de ne pas ajouter de colonne index
     # et sep=";" nous permet de conserver le séparateur d'origine
     df_clean.to_csv(cleaned_path, index=False, sep=";")
-    print(f"Fichier nettoyé sauvegardé : {cleaned_path}")
-
-
 
 # Permet d'exécuter la fonction directement si le script est lancé seul
 if __name__ == "__main__":
