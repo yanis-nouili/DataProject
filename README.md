@@ -20,6 +20,8 @@ DataProject/
 
 │-- README.md # Ce fichier
 
+│-- video.zip # contient une video de presentation du dashboard en .mp4
+
 │-- data/ # Contient les données
 
 │ ├─ raw/
