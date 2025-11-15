@@ -110,16 +110,15 @@ Le projet contient deux scripts utilitaires principaux :
 ## Developer Guide
 
 Cette section décrit l’architecture générale du projet ainsi que les relations entre les différents fichiers Python.
-Le code suit une approche impérative, avec un programme principal (`main.py`) qui :
--charge les données nettoyées,
+Le code suit une approche impérative, avec un fichier principal (`main.py`) qui :
+- charge les données nettoyées,
 - initialise l'application Dash,
-
 - construit l’interface utilisateur,
 - met à jour les graphiques via des callbacks.
 
 Les scripts du dossier utils/ fournissent des fonctionnalités séparées :
-- téléchargement des données (`get_data.py`),
-- nettoyage et préparation (`clean_data.py`).
+- `get_data.py` : télécharge le fichier de trafic depuis Open Data Rennes et l’enregistre dans `data/raw/`,
+- `clean_data.py` : lit les données brutes, applique les étapes de nettoyage, puis génère un fichier propre dans `data/processed/`.
 
 Le schéma ci-dessous illustre cette architecture.
 
@@ -142,10 +141,6 @@ graph TD
     B --> P[data/processed/etat_du_trafic_clean.csv];
     A --> P;
 ```
-
-
-
-
 
 
 ## Rapport d’analyse
