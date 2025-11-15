@@ -229,16 +229,27 @@ else:
 **Filtre “Statut du trafic”**:
 
 "html.Div(
+
    [
+
       html.Label("Filtrer par statut du trafic"), # Label affiché
+
       dcc.Dropdown(
+
          id="status", # Identifiant du composant 
+
          options=[{"label": s, "value": s} for s in statuses], # Liste des choix
+
          value=statuses, # Valeurs sélectionnées par défaut
+
          multi=True, # Autorise plusieurs valeurs
+
       ),
+
    ],
+
    style={"marginBottom": "12px"},
+   
 ),"
 
 Nous avons ensuite réutilisé cette structure comme base pour développer les autres filtres de l'application
