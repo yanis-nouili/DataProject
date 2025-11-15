@@ -127,16 +127,22 @@ Le schéma ci-dessous illustre cette architecture.
 ### Diagramme d’architecture
 
 ```mermaid
-%%{init: { "fontFamily": "GitLab Sans" }}%%
+%%{init: { "fontFamily": "GitLab Sans" } }%%
 graph TD
-    accTitle: Basic Mermaid diagram example
-    accDescr: Simple flowchart showing nodes A, B, C, and D with connections between them.
 
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;
+    accTitle: Architecture du projet DataProject
+    accDescr: Diagramme montrant les relations entre main.py, clean_data.py, get_data.py et les fichiers CSV.
+
+    A[main.py] --> B[clean_data.py];
+    A --> C[get_data.py];
+
+    C --> R[data/raw/etat-du-trafic.csv];
+    B --> R;
+
+    B --> P[data/processed/etat_du_trafic_clean.csv];
+    A --> P;
 ```
+
 
 
 
