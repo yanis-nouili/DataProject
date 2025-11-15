@@ -23,7 +23,7 @@ def clean_data():
     raw_path = Path("data/raw/etat-du-trafic-en-temps-reel.csv")
 
     # cleaned_path est le chemin où sera sauvegardé le CSV nettoyé
-    cleaned_path = Path("data/processed/etats_du_trafic_clean.csv")
+    cleaned_path = Path("data/processed/etat_du_trafic_clean.csv")
     
     # On crée le dossier "processed" dans le cas ou il n'existerait pas encore
     cleaned_path.parent.mkdir(parents=True, exist_ok=True)
