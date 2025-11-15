@@ -117,7 +117,7 @@ Le code suit une approche impérative, avec un fichier principal (`main.py`) qui
 - met à jour les graphiques via des callbacks.
 
 Les scripts du dossier utils/ fournissent des fonctionnalités séparées :
-- `get_data.py` : télécharge le fichier de trafic depuis Open Data Rennes et l’enregistre dans `data/raw/`,
+- `get_data.py` : télécharge le fichier de trafic et l’enregistre dans `data/raw/`,
 - `clean_data.py` : lit les données brutes, applique les étapes de nettoyage, puis génère un fichier propre dans `data/processed/`.
 
 Le schéma ci-dessous illustre cette architecture.
@@ -225,6 +225,25 @@ else:
    df["lat"] = df["lat"].astype(float)
    
    df["lon"] = df["lon"].astype(float) "
+
+**Filtre “Statut du trafic”**:
+
+html.Div(
+            [
+                html.Label("Filtrer par statut du trafic"), # Label affiché
+                dcc.Dropdown(
+                    id="status", # Identifiant du composant 
+                    options=[{"label": s, "value": s} for s in statuses], # Liste des choix
+                    value=statuses, # Valeurs sélectionnées par défaut
+                    multi=True, # Autorise plusieurs valeurs
+                ),
+            ],
+            style={"marginBottom": "12px"},
+        ),
+
+Nous avons ensuite réutilisé cette structure comme base pour développer les autres filtres de l'application
+
+
 
 pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée ;
 
